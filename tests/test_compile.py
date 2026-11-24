@@ -453,5 +453,89 @@ class TestCompileCLI(unittest.TestCase):
         return json.loads(html_text[start:end])
 
 
+class TestPortabilityLint(unittest.TestCase):
+    @staticmethod
+    def _parse_frontmatter(skill_md_text: str) -> dict[str, str]:
+        lines = skill_md_text.splitlines()
+        if not lines or lines[0].strip() != "---":
+            raise AssertionError("SKILL.md missing opening YAML frontmatter delimiter '---'")
+        end_idx = None
+        for idx in range(1, len(lines)):
+            if lines[idx].strip() == "---":
+                end_idx = idx
+                break
+        if end_idx is None:
+            raise AssertionError("SKILL.md missing closing YAML frontmatter delimiter '---'")
+
+        fm_lines = lines[1:end_idx]
+        parsed: dict[str, str] = {}
+        current_key: str | None = None
+        block_mode = False
+        buf: list[str] = []
+
+        def _flush():
+            nonlocal current_key, block_mode, buf
+            if current_key is not None:
+                val = "\n".join(buf).strip()
+                if len(val) >= 2 and ((val[0] == val[-1] == '"') or (val[0] == val[-1] == "'")):
+                    val = val[1:-1]
+                parsed[current_key] = val
+            current_key = None
+            block_mode = False
+            buf = []
+
+        for line in fm_lines:
+            if not line.strip() or line.lstrip().startswith("#"):
+                if block_mode:
+                    buf.append("")
+                continue
+            if not line[0].isspace():
+                if ":" not in line:
+                    raise AssertionError(f"Invalid YAML frontmatter line: {line!r}")
+                _flush()
+                k, v = line.split(":", 1)
+                current_key = k.strip()
+                v_stripped = v.strip()
+                if v_stripped in ("|", "|-", ">", ">-"):
+                    block_mode = True
+                elif v_stripped:
+                    buf.append(v_stripped)
+            else:
+                if current_key is None:
+                    raise AssertionError(f"Indented YAML line before key: {line!r}")
+                buf.append(line.strip())
+        _flush()
+        return parsed
+
+    def test_skill_frontmatter_base_spec_only(self):
+        skill_path = REPO_ROOT / "SKILL.md"
+        self.assertTrue(skill_path.is_file(), "SKILL.md must exist at repository root")
+        fm = self._parse_frontmatter(skill_path.read_text(encoding="utf-8"))
+        self.assertEqual(set(fm.keys()), {"name", "description"})
+        self.assertEqual(fm["name"], "bg-teach")
+        self.assertTrue(fm["description"].strip(), "description must be non-empty")
+
+    def test_repo_has_zero_personal_or_vault_references(self):
+        forbidden = [
+            "/home/" + "eklay",
+            "second" + "brain",
+            "80 AI " + "Artifacts",
+            "obsid" + "ian://",
+            "vault-" + "context",
+        ]
+        hits: list[str] = []
+        for path in sorted(REPO_ROOT.rglob("*")):
+            if not path.is_file():
+                continue
+            rel = path.relative_to(REPO_ROOT)
+            if any(part in {".git", "__pycache__"} for part in rel.parts):
+                continue
+            text_lower = path.read_text(encoding="utf-8", errors="ignore").lower()
+            for token in forbidden:
+                if token.lower() in text_lower:
+                    hits.append(f"{rel}: matched {token!r}")
+        self.assertEqual(hits, [], f"Forbidden portability strings found: {hits}")
+
+
 if __name__ == "__main__":
     unittest.main()
