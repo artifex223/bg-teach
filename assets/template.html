@@ -1,0 +1,1940 @@
+<!doctype html>
+<html lang="en" data-theme="felt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>bg-teach — Table Teaching Guide</title>
+  <meta name="theme-color" content="#0d1713">
+  <meta name="color-scheme" content="dark light">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="bg-teach Guide">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <style>
+    /* ==========================================================================
+       1. Tessera Theme Tokens (felt, ledger, dim)
+       ========================================================================== */
+    :root, [data-theme="felt"] {
+      color-scheme: dark;
+      --bg: #0d1713; --surface-1: #14221c; --surface-2: #1b2c24; --surface-3: #243a2f;
+      --overlay: rgba(4, 9, 7, 0.74); --border: #2a3f34; --border-strong: #46614f;
+      --text: #ece3cf; --text-muted: #b5ae9b; --text-faint: #8d9689; --text-on-accent: #1a1408;
+      --accent: #c9a45c; --accent-strong: #e0bd72; --accent-soft: rgba(201, 164, 92, 0.16); --accent-2: #6fae94;
+      --ok: #7cc08f; --ok-soft: rgba(124, 192, 143, 0.16); --warn: #e2b04a; --warn-soft: rgba(226, 176, 74, 0.16);
+      --bad: #e58a7a; --bad-soft: rgba(229, 138, 122, 0.16); --info: #7fb0d6; --info-soft: rgba(127, 176, 214, 0.16);
+      --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-pill: 999px;
+      --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+      --font-body: "Avenir Next", "Segoe UI", Optima, Candara, system-ui, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      --fs-xs: 0.75rem; --fs-sm: 0.8125rem; --fs-md: 1rem; --fs-lg: 1.125rem; --fs-xl: 1.375rem; --fs-2xl: 1.75rem; --fs-3xl: 2.5rem;
+      --lh-tight: 1.15; --lh-normal: 1.5; --fw-regular: 400; --fw-medium: 500; --fw-bold: 700; --tracking-display: 0.01em;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+      --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4); --shadow-2: 0 10px 30px rgba(0, 0, 0, 0.55);
+      --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+      --dur-fast: 140ms; --dur-med: 260ms; --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+      --tap-min: 44px;
+    }
+
+    [data-theme="ledger"] {
+      color-scheme: light;
+      --bg: #f4efe3; --surface-1: #fbf8f0; --surface-2: #f0eadb; --surface-3: #e5ddca;
+      --overlay: rgba(27, 26, 23, 0.45); --border: #d6cdb8; --border-strong: #8f8670;
+      --text: #1b1a17; --text-muted: #504a3e; --text-faint: #6c6554; --text-on-accent: #ffffff;
+      --accent: #c0361b; --accent-strong: #9a2a14; --accent-soft: rgba(192, 54, 27, 0.10); --accent-2: #1f5f8b;
+      --ok: #1f6f43; --ok-soft: rgba(31, 111, 67, 0.10); --warn: #8a5a00; --warn-soft: rgba(138, 90, 0, 0.12);
+      --bad: #b02a12; --bad-soft: rgba(176, 42, 18, 0.10); --info: #1f5f8b; --info-soft: rgba(31, 95, 139, 0.10);
+      --radius-sm: 2px; --radius-md: 3px; --radius-lg: 4px; --radius-pill: 3px;
+      --font-display: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      --fs-xs: 0.75rem; --fs-sm: 0.8125rem; --fs-md: 1rem; --fs-lg: 1.125rem; --fs-xl: 1.375rem; --fs-2xl: 1.75rem; --fs-3xl: 2.5rem;
+      --lh-tight: 1.1; --lh-normal: 1.45; --fw-regular: 400; --fw-medium: 500; --fw-bold: 650; --tracking-display: -0.02em;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+      --shadow-1: none; --shadow-2: none;
+      --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--text);
+      --dur-fast: 0ms; --dur-med: 80ms; --ease: linear;
+      --tap-min: 44px;
+    }
+
+    [data-theme="dim"] {
+      color-scheme: dark;
+      --bg: #161412; --surface-1: #1e1b18; --surface-2: #27231f; --surface-3: #322d27;
+      --overlay: rgba(10, 9, 8, 0.80); --border: #3a342e; --border-strong: #595046;
+      --text: #d6cbb8; --text-muted: #a69c8b; --text-faint: #847b6c; --text-on-accent: #181410;
+      --accent: #b89862; --accent-strong: #cca96e; --accent-soft: rgba(184, 152, 98, 0.14); --accent-2: #7da18e;
+      --ok: #7eab89; --ok-soft: rgba(126, 171, 137, 0.14); --warn: #cfa15a; --warn-soft: rgba(207, 161, 90, 0.14);
+      --bad: #cc8073; --bad-soft: rgba(204, 128, 115, 0.14); --info: #83a3bd; --info-soft: rgba(131, 163, 189, 0.14);
+      --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-pill: 999px;
+      --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+      --font-body: "Avenir Next", "Segoe UI", Optima, Candara, system-ui, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      --fs-xs: 0.75rem; --fs-sm: 0.8125rem; --fs-md: 1rem; --fs-lg: 1.125rem; --fs-xl: 1.375rem; --fs-2xl: 1.75rem; --fs-3xl: 2.5rem;
+      --lh-tight: 1.15; --lh-normal: 1.52; --fw-regular: 450; --fw-medium: 550; --fw-bold: 700; --tracking-display: 0.01em;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+      --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.45); --shadow-2: 0 10px 26px rgba(0, 0, 0, 0.55);
+      --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+      --dur-fast: 140ms; --dur-med: 260ms; --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+      --tap-min: 44px;
+    }
+
+    /* ==========================================================================
+       2. Reset & Shared Base Primitives (Tokens Only — Zero Literal Hex Values)
+       ========================================================================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html {
+      -webkit-text-size-adjust: 100%;
+      background: var(--bg);
+      color: var(--text);
+    }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      background: var(--bg);
+      color: var(--text);
+      font: var(--fw-regular) var(--fs-md)/var(--lh-normal) var(--font-body);
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, p, ul, ol { margin: 0; padding: 0; }
+    ul, ol { list-style: none; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    a { color: var(--accent-strong); overflow-wrap: anywhere; }
+    svg { max-width: 100%; height: auto; display: block; }
+    :focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    * { min-width: 0; }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+    }
+
+    .app-root {
+      min-height: 100dvh;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    /* Guaranteed >= 44px interactive touch targets */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      min-height: var(--tap-min);
+      min-width: var(--tap-min);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-strong);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-medium);
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+    }
+    .btn:hover { background: var(--surface-3); }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn--accent {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--text-on-accent);
+      font-weight: var(--fw-bold);
+    }
+    .btn--accent:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+    .btn--ghost { background: transparent; border-color: var(--border); }
+    .btn--ok { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+    .btn--warn { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
+
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      min-height: var(--tap-min);
+      min-width: var(--tap-min);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--accent-strong);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-medium);
+      text-decoration: none;
+      max-width: 100%;
+    }
+    .link-btn:hover { background: var(--surface-3); border-color: var(--accent); }
+
+    .pill-group {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: var(--space-1);
+      padding: 2px;
+      border-radius: var(--radius-md);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      max-width: 100%;
+    }
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: var(--tap-min);
+      min-width: var(--tap-min);
+      padding: 0 var(--space-3);
+      border: 0;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-medium);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .pill-btn[aria-pressed="true"],
+    .pill-btn[aria-selected="true"] {
+      background: var(--accent-soft);
+      color: var(--text);
+      font-weight: var(--fw-bold);
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+
+    /* Status & semantic badges (non-interactive) */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: 2px var(--space-2);
+      border-radius: var(--radius-pill);
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-bold);
+      letter-spacing: 0.03em;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .badge--draft { background: var(--warn-soft); color: var(--warn); border-color: var(--warn); }
+    .badge--errata { background: var(--bad-soft); color: var(--bad); border-color: var(--bad); }
+    .badge--verify { background: var(--warn-soft); color: var(--warn); border-color: var(--warn); }
+    .badge--info { background: var(--info-soft); color: var(--info); border-color: var(--info); }
+    .badge--ok { background: var(--ok-soft); color: var(--ok); border-color: var(--ok); }
+    .badge--accent { background: var(--accent-soft); color: var(--accent-strong); border-color: var(--accent); }
+    .badge--muted { background: var(--surface-2); color: var(--text-muted); border-color: var(--border); }
+    .badge--wrap { white-space: normal; max-width: 100%; overflow-wrap: anywhere; text-align: left; }
+
+    .cite {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-faint);
+      overflow-wrap: anywhere;
+    }
+
+    /* 44px Accessible Custom Checkbox Row */
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      min-height: var(--tap-min);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface-1);
+      cursor: pointer;
+    }
+    .check-row.is-done {
+      opacity: 0.72;
+      background: var(--surface-2);
+    }
+    .check-row.is-done .check-title { text-decoration: line-through; }
+    .check-row input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      flex: none;
+      position: relative;
+      width: var(--tap-min);
+      height: var(--tap-min);
+      margin: calc(var(--space-2) * -1) 0 calc(var(--space-2) * -1) calc(var(--space-2) * -1);
+      background: none;
+      border: 0;
+      cursor: pointer;
+    }
+    .check-row input[type="checkbox"]::before {
+      content: "";
+      position: absolute;
+      inset: 11px;
+      border: 2px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+    }
+    .check-row input[type="checkbox"]:checked::before {
+      background: var(--ok);
+      border-color: var(--ok);
+    }
+    .check-row input[type="checkbox"]:checked::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 14px;
+      width: 6px;
+      height: 11px;
+      border: solid var(--text-on-accent);
+      border-width: 0 2.5px 2.5px 0;
+      transform: rotate(45deg);
+    }
+    .check-body { flex: 1; display: flex; flex-direction: column; gap: var(--space-1); }
+    .check-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2); }
+    .check-title { font-weight: var(--fw-bold); color: var(--text); }
+    .check-detail { font-size: var(--fs-sm); color: var(--text-muted); }
+
+    /* Callouts */
+    .callout {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      background: var(--surface-1);
+    }
+    .callout--errata { border-left-color: var(--bad); background: var(--bad-soft); border-color: var(--bad); }
+    .callout--verify { border-left-color: var(--warn); background: var(--warn-soft); border-color: var(--warn); }
+    .callout--notes { border-left-color: var(--accent-2); background: var(--surface-2); }
+    .callout-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); font-weight: var(--fw-bold); }
+    .diff-strike { text-decoration: line-through; color: var(--text-muted); font-size: var(--fs-sm); }
+    .diff-new { color: var(--text); font-weight: var(--fw-medium); }
+
+    /* Details disclosure >= 44px summary */
+    details.acc {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-1);
+      padding: 0 var(--space-3);
+    }
+    details.acc > summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      min-height: var(--tap-min);
+      cursor: pointer;
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-sm);
+      color: var(--text);
+      list-style: none;
+    }
+    details.acc > summary::-webkit-details-marker { display: none; }
+    details.acc > summary::after {
+      content: "+";
+      font-family: var(--font-mono);
+      font-size: var(--fs-lg);
+      color: var(--accent-strong);
+      flex: none;
+    }
+    details.acc[open] > summary::after { content: "−"; }
+    .acc-body {
+      padding: var(--space-3) 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Inline SVG Diagram Wrapper */
+    .diagram-frame {
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .diagram-caption {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-2);
+    }
+
+    /* Iconography mini table / list */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2);
+    }
+    @media (min-width: 680px) {
+      .icon-grid--2col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .icon-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+    }
+    .icon-glyph {
+      width: 36px;
+      height: 36px;
+      flex: none;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      border: 1px solid var(--border-strong);
+    }
+
+    /* ==========================================================================
+       3. Search & Table Settings Drawer
+       ========================================================================== */
+    .va-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      background: var(--overlay);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .va-drawer-backdrop[hidden] { display: none; }
+    .va-drawer {
+      width: 100%;
+      max-width: 720px;
+      max-height: 86dvh;
+      background: var(--surface-1);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      box-shadow: var(--shadow-2);
+      display: flex;
+      flex-direction: column;
+      padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+    }
+    @media (min-width: 900px) {
+      .va-drawer-backdrop { justify-content: flex-end; align-items: stretch; }
+      .va-drawer {
+        width: 480px;
+        max-height: none;
+        height: 100%;
+        border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+      }
+    }
+    .va-drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--border);
+    }
+    .va-drawer-body {
+      overflow-y: auto;
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .vd-search {
+      width: 100%;
+      min-height: var(--tap-min);
+      padding: 0 var(--space-3);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-strong);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: var(--fs-md);
+    }
+    .vd-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-left-width: 5px;
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      font-size: var(--fs-md);
+      line-height: var(--lh-normal);
+    }
+    .vd-card--goal { border-left-color: var(--accent); }
+    .vd-card--setup { border-left-color: var(--ok); }
+    .vd-card--action { border-left-color: var(--info); }
+    .vd-card--errata { border-left-color: var(--bad); }
+    .vd-card--verify { border-left-color: var(--warn); }
+    .vd-card--ref { border-left-color: var(--accent-2); }
+    .vd-card-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+    }
+    .vd-card-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-lg);
+      font-weight: var(--fw-bold);
+      line-height: var(--lh-tight);
+    }
+
+    /* ==========================================================================
+       4. Variant C — Stage Rail & Split Table-Sheet (Tablet-Forward + Pass-Around)
+       ========================================================================== */
+    .vc-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 100dvh;
+    }
+    .vc-rail {
+      background: var(--surface-1);
+      border-bottom: 1px solid var(--border);
+      padding: calc(var(--space-3) + env(safe-area-inset-top)) var(--space-3) var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    .vc-rail-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+    }
+    .vc-rail-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .vc-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-lg);
+      font-weight: var(--fw-bold);
+      letter-spacing: var(--tracking-display);
+    }
+    .vc-stage-list {
+      display: flex;
+      gap: var(--space-2);
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .vc-stage-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      min-height: var(--tap-min);
+      min-width: var(--tap-min);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text-muted);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-medium);
+      cursor: pointer;
+      white-space: nowrap;
+      flex: none;
+      text-align: left;
+    }
+    .vc-stage-btn[aria-current="step"] {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--text);
+      font-weight: var(--fw-bold);
+    }
+    .vc-stage-num {
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-3);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      font-size: var(--fs-xs);
+      font-family: var(--font-mono);
+      flex: none;
+    }
+    .vc-stage-btn[aria-current="step"] .vc-stage-num {
+      background: var(--accent);
+      color: var(--text-on-accent);
+      font-weight: var(--fw-bold);
+    }
+    .vc-rail-links { display: none; }
+    .vc-mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .vc-canvas {
+      padding: var(--space-4);
+      max-width: 1180px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .vc-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+      align-items: start;
+    }
+    .vc-pane {
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    @media (min-width: 768px) {
+      .vc-mobile-links { display: none; }
+      .vc-shell:not(.vc-shell--passaround) {
+        grid-template-columns: 270px minmax(0, 1fr);
+      }
+      .vc-shell:not(.vc-shell--passaround) .vc-rail {
+        height: 100dvh;
+        overflow-y: auto;
+        border-bottom: 0;
+        border-right: 1px solid var(--border);
+        padding: var(--space-4);
+        padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+      }
+      .vc-shell:not(.vc-shell--passaround) .vc-stage-list {
+        flex-direction: column;
+        overflow-x: visible;
+      }
+      .vc-shell:not(.vc-shell--passaround) .vc-stage-btn {
+        width: 100%;
+        white-space: normal;
+        justify-content: flex-start;
+      }
+      .vc-shell:not(.vc-shell--passaround) .vc-rail-links {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        margin-top: auto;
+        padding-top: var(--space-3);
+        border-top: 1px solid var(--border);
+      }
+      .vc-canvas { padding: var(--space-5); }
+      .vc-split { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
+    }
+
+    /* Pass-Around Player Aid Mode */
+    .vc-pass-header {
+      background: var(--surface-1);
+      border-bottom: 2px solid var(--accent);
+      padding: calc(var(--space-3) + env(safe-area-inset-top)) var(--space-4) var(--space-3);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+    .vc-pass-canvas {
+      max-width: 1120px;
+      margin: 0 auto;
+      width: 100%;
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .vc-pass-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+      align-items: start;
+    }
+    @media (min-width: 768px) {
+      .vc-pass-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* Manual JSON Paste Fallback */
+    .paste-fallback {
+      max-width: 760px;
+      margin: var(--space-6) auto;
+      padding: 0 var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .paste-box {
+      width: 100%;
+      min-height: 220px;
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-strong);
+      background: var(--surface-2);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+  <div id="app-root" class="app-root"></div>
+
+  <script id="guide-data" type="application/json"><!-- BG_TEACH_GUIDE_JSON --></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    const THEMES = [
+      { key: 'felt', label: 'Felt', metaColor: '#0d1713' },
+      { key: 'ledger', label: 'Ledger', metaColor: '#f4efe3' },
+      { key: 'dim', label: 'Dim Table', metaColor: '#161412' }
+    ];
+
+    const rootEl = document.getElementById('app-root');
+    const PLACEHOLDER = '<!-- BG_TEACH_GUIDE_JSON -->';
+
+    let DATA = null;
+    let SETUP_TOTAL = 0;
+    let STORAGE_KEY = 'bg-teach:v1:guide';
+    let ERRATA_BY_ID = new Map();
+    let VERIFY_BY_ID = new Map();
+    let VALID_SETUP_IDS = new Set();
+
+    const state = {
+      players: 4,
+      theme: 'felt',
+      checked: new Set(),
+      wakeDesired: false,
+      wakeStatus: 'off',
+      wakeSentinel: null,
+      cStage: 1,
+      cPassAround: false,
+      cDrawerOpen: false,
+      cSearchQuery: ''
+    };
+
+    function esc(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function computeStorageKey(data) {
+      if (data.game_uuid && String(data.game_uuid).trim()) {
+        return `bg-teach:v1:${String(data.game_uuid).trim()}`;
+      }
+      const slug = String((data.meta && data.meta.title) || 'guide')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'guide';
+      return `bg-teach:v1:${slug}`;
+    }
+
+    function loadPersistedState() {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object') {
+          const minP = Number(DATA.meta.min_players) || 1;
+          const maxP = Number(DATA.meta.max_players) || 12;
+          if (typeof parsed.players === 'number' && parsed.players >= minP && parsed.players <= maxP) {
+            state.players = Math.round(parsed.players);
+          }
+          if (THEMES.some((t) => t.key === parsed.theme)) {
+            state.theme = parsed.theme;
+          }
+          if (Array.isArray(parsed.checked)) {
+            state.checked = new Set(parsed.checked.filter((id) => VALID_SETUP_IDS.has(id)));
+          }
+        }
+      } catch (_) {}
+    }
+
+    function savePersistedState() {
+      try {
+        window.localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            players: state.players,
+            theme: state.theme,
+            checked: Array.from(state.checked)
+          })
+        );
+      } catch (_) {}
+    }
+
+    function initGuideData(guide) {
+      DATA = guide;
+      const shared = (DATA.stage2_setup && DATA.stage2_setup.shared_board) || [];
+      const perPlayer = (DATA.stage2_setup && DATA.stage2_setup.per_player) || [];
+      VALID_SETUP_IDS = new Set([...shared, ...perPlayer].map((i) => i.id));
+      SETUP_TOTAL = shared.length + perPlayer.length;
+
+      ERRATA_BY_ID = new Map(
+        ((DATA.stage5_reference && DATA.stage5_reference.errata_list) || []).map((e) => [e.id, e])
+      );
+      VERIFY_BY_ID = new Map(
+        ((DATA.stage5_reference && DATA.stage5_reference.verify_before_table) || []).map((v) => [v.id, v])
+      );
+
+      const minP = Number(DATA.meta.min_players) || 1;
+      const maxP = Number(DATA.meta.max_players) || 12;
+      state.players = Math.min(Math.max(4, minP), maxP);
+      state.theme = 'felt';
+      state.checked = new Set();
+      state.cStage = 1;
+      state.cPassAround = false;
+      state.cDrawerOpen = false;
+      state.cSearchQuery = '';
+
+      STORAGE_KEY = computeStorageKey(DATA);
+      loadPersistedState();
+
+      document.title = `${DATA.meta.title} — Table Teaching Guide`;
+      const appleTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+      if (appleTitle) appleTitle.setAttribute('content', `${DATA.meta.title} Guide`);
+    }
+
+    function applyTheme(themeKey) {
+      state.theme = THEMES.some((t) => t.key === themeKey) ? themeKey : 'felt';
+      document.documentElement.dataset.theme = state.theme;
+      const tObj = THEMES.find((t) => t.key === state.theme);
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta && tObj) meta.setAttribute('content', tObj.metaColor);
+    }
+
+    function renderCitations(cites) {
+      if (!Array.isArray(cites) || !cites.length) return '';
+      return cites.map((c) => `<span class="cite">${esc(c)}</span>`).join(' ');
+    }
+
+    function renderStatusBadge() {
+      if (!DATA || DATA.status !== 'draft') return '';
+      return `<span class="badge badge--draft" title="Verify against live teach before clearing draft">DRAFT</span>`;
+    }
+
+    /* ---------------- Wake Lock (tap-triggered + visibilitychange) ---------------- */
+    function wakeLabel() {
+      if (state.wakeStatus === 'on') return 'Wake: On';
+      if (state.wakeStatus === 'unsupported') return 'Wake: N/A';
+      return 'Wake: Off';
+    }
+
+    function updateWakeButtonsInPlace() {
+      document.querySelectorAll('[data-action="toggle-wake"]').forEach((btn) => {
+        btn.textContent = wakeLabel();
+        btn.setAttribute('aria-pressed', state.wakeStatus === 'on' ? 'true' : 'false');
+        btn.className = 'btn ' + (state.wakeStatus === 'on' ? 'btn--ok' : (state.wakeStatus === 'unsupported' ? 'btn--warn' : 'btn--ghost'));
+      });
+    }
+
+    async function requestWakeLock() {
+      if (!('wakeLock' in navigator) || typeof navigator.wakeLock.request !== 'function') {
+        state.wakeStatus = 'unsupported';
+        state.wakeDesired = false;
+        return;
+      }
+      try {
+        const sentinel = await navigator.wakeLock.request('screen');
+        state.wakeSentinel = sentinel;
+        state.wakeStatus = 'on';
+        sentinel.addEventListener('release', () => {
+          state.wakeSentinel = null;
+          if (!state.wakeDesired) {
+            state.wakeStatus = 'off';
+            updateWakeButtonsInPlace();
+          }
+        });
+      } catch (_) {
+        state.wakeSentinel = null;
+        state.wakeDesired = false;
+        state.wakeStatus = 'unsupported';
+      }
+    }
+
+    async function toggleWakeLock() {
+      if (state.wakeStatus === 'on') {
+        state.wakeDesired = false;
+        state.wakeStatus = 'off';
+        if (state.wakeSentinel) {
+          try { await state.wakeSentinel.release(); } catch (_) {}
+          state.wakeSentinel = null;
+        }
+      } else {
+        state.wakeDesired = true;
+        await requestWakeLock();
+      }
+      renderApp();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && state.wakeDesired && !state.wakeSentinel) {
+        requestWakeLock().then(() => {
+          updateWakeButtonsInPlace();
+        });
+      }
+    });
+
+    /* ---------------- Link & Inline SVG Sanitization ---------------- */
+    function isSafeLinkHref(rawUrl, allowRelative) {
+      if (!rawUrl || typeof rawUrl !== 'string') return false;
+      const trimmed = rawUrl.trim();
+      const compact = trimmed.replace(/[\x00-\x20\u007f]+/g, '');
+      if (!compact) return false;
+      if (/^https?:\/\//i.test(compact)) return true;
+      if (allowRelative) {
+        if (/^file:\/\//i.test(compact)) return true;
+        if (!compact.startsWith('//') && !/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(compact)) return true;
+      }
+      return false;
+    }
+
+    const SAFE_SVG_TAGS = new Set([
+      'svg', 'title', 'desc', 'defs', 'marker', 'g', 'rect', 'circle',
+      'ellipse', 'line', 'polyline', 'polygon', 'path', 'text', 'tspan',
+      'lineargradient', 'radialgradient', 'stop'
+    ]);
+    const URL_REF_ATTRS = new Set([
+      'marker-start', 'marker-mid', 'marker-end', 'fill', 'stroke', 'clip-path', 'mask', 'filter'
+    ]);
+
+    function stripCommentsAndCdata(node) {
+      for (const child of Array.from(node.childNodes)) {
+        if (child.nodeType === 4 || child.nodeType === 8) {
+          child.remove();
+        } else if (child.nodeType === 1) {
+          stripCommentsAndCdata(child);
+        }
+      }
+    }
+
+    function sanitizeInlineSvg(rawSvg) {
+      if (!rawSvg || typeof rawSvg !== 'string') return '';
+      try {
+        const doc = new DOMParser().parseFromString(rawSvg, 'image/svg+xml');
+        if (doc.querySelector('parsererror')) return '';
+        const root = doc.documentElement;
+        const isSvgNs = (ns) => ns === 'http://www.w3.org/2000/svg' || ns === null;
+        if (!root || root.localName.toLowerCase() !== 'svg' || !isSvgNs(root.namespaceURI)) {
+          return '';
+        }
+
+        stripCommentsAndCdata(root);
+
+        for (const el of [root, ...Array.from(root.querySelectorAll('*'))]) {
+          if (!el.parentNode && el !== root) continue;
+          const lname = el.localName.toLowerCase();
+          if (!isSvgNs(el.namespaceURI) || !SAFE_SVG_TAGS.has(lname)) {
+            if (el === root) return '';
+            el.remove();
+            continue;
+          }
+          if (lname === 'title' || lname === 'desc') {
+            el.textContent = el.textContent || '';
+          }
+          for (const attr of Array.from(el.attributes)) {
+            const alname = attr.localName.toLowerCase();
+            if (
+              alname.startsWith('on') ||
+              alname === 'href' ||
+              alname === 'src' ||
+              alname === 'data' ||
+              alname === 'formaction' ||
+              alname === 'action' ||
+              alname === 'style'
+            ) {
+              el.removeAttributeNode(attr);
+              continue;
+            }
+            if (URL_REF_ATTRS.has(alname) && /url\s*\(/i.test(attr.value)) {
+              const allLocalRefs = Array.from(attr.value.matchAll(/url\(([^)]*)\)/gi)).every((m) =>
+                /^\s*['"]?#[A-Za-z_][A-Za-z0-9_.:-]*['"]?\s*$/.test(m[1])
+              );
+              if (!allLocalRefs) {
+                el.removeAttributeNode(attr);
+              }
+            }
+          }
+        }
+        return new XMLSerializer().serializeToString(root);
+      } catch (_) {
+        return '';
+      }
+    }
+
+    function renderTurnFlowSVG() {
+      const safeSvg = sanitizeInlineSvg(DATA.stage3_turn.turn_flow_svg);
+      const allCites = [];
+      (DATA.stage3_turn.phases || []).forEach((ph) => {
+        (ph.citations || []).forEach((c) => {
+          if (!allCites.includes(c)) allCites.push(c);
+        });
+      });
+      if (DATA.stage3_turn.free_action && Array.isArray(DATA.stage3_turn.free_action.citations)) {
+        DATA.stage3_turn.free_action.citations.forEach((c) => {
+          if (!allCites.includes(c)) allCites.push(c);
+        });
+      }
+      return `
+        <div class="diagram-frame">
+          ${safeSvg || '<p style="font-size:var(--fs-sm);color:var(--text-muted);">Turn-flow diagram unavailable.</p>'}
+          <div class="diagram-caption">
+            <span>Turn Flow (inline SVG · theme-aware)</span>
+            <span>${renderCitations(allCites)}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderIconSVG(ic) {
+      if (ic && ic.svg) {
+        const safe = sanitizeInlineSvg(ic.svg);
+        if (safe) return safe;
+      }
+      return '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-strong)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="var(--accent-soft)"/><circle cx="12" cy="12" r="2.5" fill="var(--accent-strong)"/></svg>';
+    }
+
+    /* ---------------- Shared UI Snippets ---------------- */
+    function getPlayerCounts() {
+      const minP = Number(DATA.meta.min_players) || 1;
+      const maxP = Number(DATA.meta.max_players) || 12;
+      const counts = [];
+      for (let n = minP; n <= maxP; n++) counts.push(n);
+      return counts;
+    }
+
+    function renderPlayerPills() {
+      return `
+        <div class="pill-group" role="group" aria-label="Player count">
+          ${getPlayerCounts().map((n) => `
+            <button type="button" class="pill-btn" data-action="set-players" data-players="${n}" aria-pressed="${state.players === n}">${n}P</button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderThemePills() {
+      return `
+        <div class="pill-group" role="group" aria-label="Theme">
+          ${THEMES.map((t) => `
+            <button type="button" class="pill-btn" data-action="set-theme" data-theme-val="${t.key}" aria-pressed="${state.theme === t.key}">${esc(t.label)}</button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderWakeBtn() {
+      const cls = state.wakeStatus === 'on' ? 'btn--ok' : (state.wakeStatus === 'unsupported' ? 'btn--warn' : 'btn--ghost');
+      return `<button type="button" class="btn ${cls}" data-action="toggle-wake" aria-pressed="${state.wakeStatus === 'on'}">${wakeLabel()}</button>`;
+    }
+
+    function isItemVerifyActive(item) {
+      if (!item || !item.verify_ref || !VERIFY_BY_ID.has(item.verify_ref)) return false;
+      if (!Array.isArray(item.verify_players) || !item.verify_players.length) return true;
+      return item.verify_players.includes(state.players);
+    }
+
+    function renderSetupCheckboxItem(item) {
+      const done = state.checked.has(item.id);
+      const hasDelta = Boolean(item.deltas);
+      const text = hasDelta ? item.deltas[String(state.players)] : item.static_text;
+      const showVerify = isItemVerifyActive(item);
+      const verifyLabel = Array.isArray(item.verify_players) && item.verify_players.length === 1
+        ? `Verify ${item.verify_players[0]}P`
+        : 'Verify';
+      return `
+        <label class="check-row ${done ? 'is-done' : ''}">
+          <input type="checkbox" data-action="toggle-check" data-check-id="${esc(item.id)}" ${done ? 'checked' : ''}>
+          <span class="check-body">
+            <span class="check-head">
+              <span class="check-title">${esc(item.name)}</span>
+              ${hasDelta ? `<span class="badge badge--accent">${state.players}P</span>` : '<span class="badge badge--muted">All</span>'}
+              ${item.errata_ref && ERRATA_BY_ID.has(item.errata_ref) ? '<span class="badge badge--errata">[Errata]</span>' : ''}
+              ${showVerify ? `<span class="badge badge--verify">${esc(verifyLabel)}</span>` : ''}
+            </span>
+            <span class="check-detail">${esc(text)} ${renderCitations(item.citations)}</span>
+          </span>
+        </label>
+      `;
+    }
+
+    function renderErrataCallout(err) {
+      if (!err) return '';
+      return `
+        <div class="callout callout--errata">
+          <div class="callout-head">
+            <span class="badge badge--errata">[Errata]</span>
+            <span>${esc(err.title)}</span>
+            <span class="cite">${esc(err.location)}</span>
+          </div>
+          <div class="diff-strike">${esc(err.printed)}</div>
+          <div class="diff-new">${esc(err.corrected)} ${renderCitations(err.citations)}</div>
+        </div>
+      `;
+    }
+
+    function renderVerifyCallout(v) {
+      if (!v) return '';
+      return `
+        <div class="callout callout--verify" data-testid="verify-callout">
+          <div class="callout-head">
+            <span class="badge badge--verify">Verify Before Table</span>
+            <span>${esc(v.title)}</span>
+          </div>
+          <p>${esc(v.detail)} ${renderCitations(v.citations)}</p>
+        </div>
+      `;
+    }
+
+    function renderOwnerNotesCallout() {
+      const n = DATA.stage5_reference.owner_notes;
+      if (!n || !Array.isArray(n.entries) || !n.entries.length) return '';
+      return `
+        <div class="callout callout--notes">
+          <div class="callout-head">
+            <span class="badge badge--info badge--wrap">Owner ${esc(n.file)}</span>
+            <span>Deterministic Local Addendum</span>
+          </div>
+          <ul style="display:flex;flex-direction:column;gap:6px;font-size:var(--fs-sm);">
+            ${n.entries.map((entry) => `<li>• ${esc(entry)}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
+
+    function renderLinksBlock() {
+      const l = DATA.links;
+      const officialSafe = isSafeLinkHref(l.official_pdf_url, false);
+      const localSafe = isSafeLinkHref(l.pdf_local_path, true);
+      const bggSafe = isSafeLinkHref(l.bgg_search_url, false);
+      return `
+        <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;">
+          ${officialSafe ? `<a class="link-btn" href="${esc(l.official_pdf_url)}" target="_blank" rel="noopener noreferrer">${esc(l.official_pdf_label || 'Official Publisher PDF')} &nearr;</a>` : ''}
+          ${localSafe ? `<a class="link-btn" href="${esc(l.pdf_local_path)}" target="_blank" rel="noopener noreferrer" title="Shown when pdf_local_path is set; stripped in shared builds">${esc(l.pdf_local_label || 'Local PDF (private sidecar)')}</a>` : ''}
+          ${bggSafe ? `<a class="link-btn" href="${esc(l.bgg_search_url)}" target="_blank" rel="noopener noreferrer">${esc(l.bgg_search_label)} &nearr;</a>` : ''}
+        </div>
+        <p style="font-size:var(--fs-xs);color:var(--text-faint);">Local sidecar PDF action appears only when <code>pdf_local_path</code> is set locally and is stripped from shared builds. BGG link is browser-only (zero automated LLM ingestion).</p>
+      `;
+    }
+
+    function renderAttributionBlock() {
+      const ref = DATA.stage5_reference;
+      const ccList = Array.isArray(ref.cc_by_sa) ? ref.cc_by_sa : [];
+      return `
+        <div class="callout">
+          <div class="callout-head">
+            <span class="badge badge--muted">Source Precedence &amp; CC BY-SA</span>
+          </div>
+          <p style="font-size:var(--fs-xs);color:var(--text-muted);"><strong>Precedence:</strong> ${esc(ref.precedence)}</p>
+          ${ccList.map((attr) => `
+            <p style="font-size:var(--fs-xs);color:var(--text-muted);"><strong>Attribution (${esc(attr.license)} · ${esc(attr.citation)}):</strong> ${esc(attr.note)} — ${esc(attr.author)}</p>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function collectUniqueErrata(items) {
+      const seen = new Set();
+      const out = [];
+      items.forEach((item) => {
+        if (item && item.errata_ref && !seen.has(item.errata_ref) && ERRATA_BY_ID.has(item.errata_ref)) {
+          seen.add(item.errata_ref);
+          out.push(ERRATA_BY_ID.get(item.errata_ref));
+        }
+      });
+      return out;
+    }
+
+    function collectUniqueVerify(items) {
+      const seen = new Set();
+      const out = [];
+      items.forEach((item) => {
+        if (item && item.verify_ref && !seen.has(item.verify_ref) && VERIFY_BY_ID.has(item.verify_ref)) {
+          seen.add(item.verify_ref);
+          out.push(VERIFY_BY_ID.get(item.verify_ref));
+        }
+      });
+      return out;
+    }
+
+    /* ---------------- Drawer Search Index (Pass-Around Isolation) ---------------- */
+    function buildSearchEntries(passAround) {
+      const pStr = String(state.players);
+      const ref = DATA.stage5_reference;
+      const doneCount = state.checked.size;
+      const entries = [];
+
+      entries.push({
+        id: 's1-goal',
+        stage: 1,
+        railClass: 'vd-card--goal',
+        typeBadge: 'GOAL',
+        badgeClass: 'badge--accent',
+        title: `Win State & ${state.players}P End Trigger`,
+        searchText: [
+          'hook win state trigger',
+          DATA.stage1_hook.win_trigger_by_players[pStr],
+          DATA.stage1_hook.win_summary,
+          passAround ? '' : DATA.stage1_hook.physical_cue,
+          passAround ? '' : DATA.stage1_hook.pitch_aloud
+        ].join(' '),
+        html: `
+          <p><strong>${esc(DATA.stage1_hook.win_trigger_by_players[pStr])}</strong></p>
+          <p style="color:var(--text-muted);">${esc(DATA.stage1_hook.win_summary)} ${renderCitations(DATA.stage1_hook.citations)}</p>
+          ${!passAround ? `
+            <details class="acc">
+              <summary>Pitch &amp; Physical Cue</summary>
+              <div class="acc-body">
+                <p><strong>Cue:</strong> ${esc(DATA.stage1_hook.physical_cue)}</p>
+                <p>${esc(DATA.stage1_hook.pitch_aloud)}</p>
+              </div>
+            </details>
+          ` : ''}
+        `
+      });
+
+      if (!passAround) {
+        const allSetup = [...DATA.stage2_setup.shared_board, ...DATA.stage2_setup.per_player];
+        entries.push({
+          id: 's2-setup',
+          stage: 2,
+          railClass: 'vd-card--setup',
+          typeBadge: `SETUP · ${doneCount}/${SETUP_TOTAL}`,
+          badgeClass: 'badge--ok',
+          title: `Table Setup (${state.players}P Deltas)`,
+          searchText: allSetup.map((i) => i.name + ' ' + (i.deltas ? i.deltas[pStr] : i.static_text)).join(' '),
+          html: `
+            <ul style="display:flex;flex-direction:column;gap:6px;font-size:var(--fs-sm);">
+              ${allSetup.map((i) => `<li>• <strong>${esc(i.name)}:</strong> ${esc(i.deltas ? i.deltas[pStr] : i.static_text)} ${renderCitations(i.citations)}</li>`).join('')}
+            </ul>
+          `
+        });
+      }
+
+      entries.push({
+        id: 's3-turn',
+        stage: 3,
+        railClass: 'vd-card--action',
+        typeBadge: 'TURN FLOW',
+        badgeClass: 'badge--info',
+        title: 'Turn Sequence & Phases',
+        searchText: [
+          DATA.stage3_turn.summary,
+          ...DATA.stage3_turn.phases.map((ph) =>
+            [
+              ph.name,
+              ph.player_summary,
+              passAround ? '' : ph.physical_cue,
+              passAround ? '' : ph.say_aloud,
+              ...(ph.subactions || []).map((s) => `${s.name} ${s.detail}`)
+            ].join(' ')
+          ),
+          DATA.stage3_turn.free_action ? `${DATA.stage3_turn.free_action.name} ${DATA.stage3_turn.free_action.detail}` : ''
+        ].join(' '),
+        html: `
+          <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+            ${DATA.stage3_turn.phases.map((ph) => `
+              <div class="callout">
+                <div class="callout-head"><span class="badge badge--info">Phase ${ph.step}</span><span>${esc(ph.name)}</span></div>
+                <p style="font-size:var(--fs-sm);">${esc(ph.player_summary)} ${renderCitations(ph.citations)}</p>
+                ${!passAround ? `<p style="font-size:var(--fs-xs);color:var(--text-muted);"><strong>Hold up:</strong> ${esc(ph.physical_cue)} — ${esc(ph.say_aloud)}</p>` : ''}
+                ${(ph.subactions || []).map((s) => `<p style="font-size:var(--fs-xs);color:var(--text-muted);">• <strong>${esc(s.name)}:</strong> ${esc(s.detail)} ${renderCitations(s.citations)}</p>`).join('')}
+              </div>
+            `).join('')}
+            ${DATA.stage3_turn.free_action ? `<p style="font-size:var(--fs-sm);"><strong>${esc(DATA.stage3_turn.free_action.name)}:</strong> ${esc(DATA.stage3_turn.free_action.detail)} ${renderCitations(DATA.stage3_turn.free_action.citations)}</p>` : ''}
+          </div>
+        `
+      });
+
+      if (!passAround) {
+        entries.push({
+          id: 's4-round1',
+          stage: 4,
+          railClass: 'vd-card--action',
+          typeBadge: 'FIRST ROUND',
+          badgeClass: 'badge--muted',
+          title: 'Guided First Round Beats',
+          searchText: DATA.stage4_first_round.map((b) => `${b.title} ${b.physical_cue} ${b.say_aloud}`).join(' '),
+          html: `
+            <ul style="display:flex;flex-direction:column;gap:6px;font-size:var(--fs-sm);">
+              ${DATA.stage4_first_round.map((b) => `<li>• <strong>Beat ${b.beat} (${esc(b.title)}):</strong> ${esc(b.say_aloud)} ${renderCitations(b.citations)}</li>`).join('')}
+            </ul>
+          `
+        });
+      }
+
+      ref.errata_list.forEach((err, idx) => {
+        entries.push({
+          id: `s5-errata-${idx}`,
+          stage: 5,
+          railClass: 'vd-card--errata',
+          typeBadge: 'ERRATA',
+          badgeClass: 'badge--errata',
+          title: err.title,
+          searchText: `errata ${err.title} ${err.location} ${err.printed} ${err.corrected}`,
+          html: renderErrataCallout(err)
+        });
+      });
+
+      if (!passAround) {
+        (ref.verify_before_table || []).forEach((v, idx) => {
+          entries.push({
+            id: `s5-verify-${idx}`,
+            stage: 5,
+            railClass: 'vd-card--verify',
+            typeBadge: 'VERIFY',
+            badgeClass: 'badge--verify',
+            title: v.title,
+            searchText: `verify before table ${v.title} ${v.detail}`,
+            html: renderVerifyCallout(v)
+          });
+        });
+      }
+
+      if (Array.isArray(ref.top_gotchas) && ref.top_gotchas.length) {
+        entries.push({
+          id: 's5-gotchas',
+          stage: 5,
+          railClass: 'vd-card--ref',
+          typeBadge: 'GOTCHAS',
+          badgeClass: 'badge--accent',
+          title: 'Top First-Game Gotchas',
+          searchText: ref.top_gotchas.map((g) => `${g.title} ${g.detail}`).join(' '),
+          html: ref.top_gotchas.map((g) => `<p style="font-size:var(--fs-sm);"><strong>${esc(g.title)}:</strong> ${esc(g.detail)} ${renderCitations(g.citations)}</p>`).join('')
+        });
+      }
+
+      if (ref.edge_cases.length) {
+        entries.push({
+          id: 's5-edges',
+          stage: 5,
+          railClass: 'vd-card--ref',
+          typeBadge: 'EDGE CASES',
+          badgeClass: 'badge--muted',
+          title: 'Deferred Edge Cases',
+          searchText: ref.edge_cases.map((ec) => `${ec.title} ${ec.detail}`).join(' '),
+          html: ref.edge_cases.map((ec) => `<p style="font-size:var(--fs-sm);"><strong>${esc(ec.title)}:</strong> ${esc(ec.detail)} ${renderCitations(ec.citations)}</p>`).join('')
+        });
+      }
+
+      entries.push({
+        id: 's5-icons',
+        stage: 5,
+        railClass: 'vd-card--ref',
+        typeBadge: 'ICONS',
+        badgeClass: 'badge--accent',
+        title: 'Iconography Key',
+        searchText: ref.iconography.map((i) => `${i.name} ${i.effect}`).join(' '),
+        html: `<div class="icon-grid">${ref.iconography.map((ic) => `
+          <div class="icon-row">
+            <div class="icon-glyph">${renderIconSVG(ic)}</div>
+            <div><strong>${esc(ic.name)}</strong><div style="font-size:var(--fs-sm);color:var(--text-muted);">${esc(ic.effect)} ${renderCitations(ic.citations)}</div></div>
+          </div>`).join('')}</div>`
+      });
+
+      entries.push({
+        id: 's5-scoring',
+        stage: 5,
+        railClass: 'vd-card--ref',
+        typeBadge: 'SCORING',
+        badgeClass: 'badge--accent',
+        title: 'End-Game Scoring & Tiebreakers',
+        searchText: `${ref.scoring.rows.map((r) => `${r.source} ${r.points}`).join(' ')} ${ref.scoring.tiebreakers}`,
+        html: `
+          ${ref.scoring.rows.map((r) => `<div style="display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--border);padding-bottom:4px;font-size:var(--fs-sm);"><span><strong>${esc(r.source)}</strong> ${renderCitations(r.citations)}</span><span style="font-family:var(--font-mono);">${esc(r.points)}</span></div>`).join('')}
+          <p style="font-size:var(--fs-xs);color:var(--text-muted);">${esc(ref.scoring.tiebreakers)}</p>
+        `
+      });
+
+      if (!passAround && ref.owner_notes && Array.isArray(ref.owner_notes.entries) && ref.owner_notes.entries.length) {
+        entries.push({
+          id: 's5-notes',
+          stage: 5,
+          railClass: 'vd-card--ref',
+          typeBadge: 'NOTES',
+          badgeClass: 'badge--info',
+          title: `Owner ${ref.owner_notes.file}`,
+          searchText: `notes.md owner addendum ${ref.owner_notes.file} ${ref.owner_notes.entries.join(' ')}`,
+          html: renderOwnerNotesCallout()
+        });
+      }
+
+      entries.push({
+        id: 's5-links',
+        stage: 5,
+        railClass: 'vd-card--ref',
+        typeBadge: 'SOURCES',
+        badgeClass: 'badge--muted',
+        title: 'Links, Precedence & CC BY-SA',
+        searchText: `precedence cc by-sa bgg pdf ${ref.precedence} ${(ref.cc_by_sa || []).map((a) => `${a.citation} ${a.author} ${a.note}`).join(' ')}`,
+        html: `${renderLinksBlock()}${renderAttributionBlock()}`
+      });
+
+      return entries;
+    }
+
+    function renderSearchResultsHtml() {
+      const q = state.cSearchQuery.trim().toLowerCase();
+      if (!q) {
+        return `<p style="font-size:var(--fs-sm);color:var(--text-muted);">Type a keyword (e.g. <em>Winter</em>, <em>Silver</em>, <em>Seal</em>, <em>Errata</em>) to jump straight to any rule, icon, or setup delta.</p>`;
+      }
+      const matches = buildSearchEntries(state.cPassAround).filter((entry) =>
+        (entry.title + ' ' + entry.searchText).toLowerCase().includes(q)
+      );
+      if (!matches.length) {
+        return `<p style="font-size:var(--fs-sm);color:var(--text-muted);">No rules match "<strong>${esc(state.cSearchQuery)}</strong>".</p>`;
+      }
+      return matches.map((entry) => {
+        const cardHtml = entry.html.replace(/<details class="acc">/g, '<details class="acc" open>');
+        return `
+          <section class="vd-card ${entry.railClass}">
+            <div class="vd-card-head">
+              <span class="badge ${entry.badgeClass}">${esc(entry.typeBadge)}</span>
+              ${!state.cPassAround ? `<button type="button" class="btn btn--ghost" data-action="c-jump-stage" data-stage="${entry.stage}">Stage ${entry.stage} &rarr;</button>` : ''}
+            </div>
+            <h3 class="vd-card-title">${esc(entry.title)}</h3>
+            ${cardHtml}
+          </section>
+        `;
+      }).join('');
+    }
+
+    function renderDrawer() {
+      const activeTheme = THEMES.find((t) => t.key === state.theme) || THEMES[0];
+      return `
+        <div class="va-drawer-backdrop" ${state.cDrawerOpen ? '' : 'hidden'} data-action="close-c-drawer-backdrop">
+          <section class="va-drawer" role="dialog" aria-modal="true" aria-label="Search and Table Settings">
+            <div class="va-drawer-head">
+              <strong style="font-family:var(--font-display);font-size:var(--fs-lg);">Search &amp; Table Settings</strong>
+              <button type="button" class="btn btn--ghost" data-action="toggle-c-drawer">Close &times;</button>
+            </div>
+            <div class="va-drawer-body">
+              <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                <label class="sr-only" for="c-search">Search rules, icons, errata</label>
+                <div style="display:flex;gap:var(--space-2);align-items:center;">
+                  <input id="c-search" class="vd-search" type="search" value="${esc(state.cSearchQuery)}" placeholder="Search rules, icons, errata...">
+                  <button type="button" class="btn btn--ghost" data-action="clear-c-search">Clear</button>
+                </div>
+                <div id="c-search-results" style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  ${renderSearchResultsHtml()}
+                </div>
+              </div>
+
+              <div class="callout" style="margin-top:var(--space-2);">
+                <div class="callout-head"><span>Table Settings</span><span class="cite">${state.players}P · ${esc(activeTheme.label)}</span></div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-3);">
+                  <div>
+                    <div style="font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:4px;">Players</div>
+                    ${renderPlayerPills()}
+                  </div>
+                  <div>
+                    <div style="font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:4px;">Theme</div>
+                    ${renderThemePills()}
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;">
+                    ${renderWakeBtn()}
+                    <button type="button" class="btn btn--ghost" data-action="reset-setup">Reset Setup (${state.checked.size}/${SETUP_TOTAL})</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    function wireSearchInput() {
+      const input = document.getElementById('c-search');
+      if (!input) return;
+      input.addEventListener('input', (e) => {
+        state.cSearchQuery = e.target.value;
+        const box = document.getElementById('c-search-results');
+        if (box) box.innerHTML = renderSearchResultsHtml();
+      });
+    }
+
+    /* ---------------- Pass-Around Mode & 5-Stage Teacher Mode ---------------- */
+    function renderPassAround() {
+      const ref = DATA.stage5_reference;
+      const pStr = String(state.players);
+      const errataList = Array.isArray(ref.errata_list) ? ref.errata_list : [];
+
+      rootEl.innerHTML = `
+        <div class="vc-shell vc-shell--passaround">
+          <header class="vc-pass-header">
+            <div>
+              <span class="badge badge--ok">Pass-Around Player Aid · ${state.players} Players</span>
+              <h1 style="font-family:var(--font-display);font-size:var(--fs-2xl);margin-top:4px;">${esc(DATA.meta.title)} — Table Aid</h1>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;">
+              <button type="button" class="btn btn--ghost" data-action="toggle-c-drawer" aria-expanded="${state.cDrawerOpen}">Search &amp; Settings</button>
+              <button type="button" class="btn btn--accent" data-action="toggle-c-passaround" aria-pressed="true">Exit Pass-Around</button>
+            </div>
+          </header>
+
+          <main class="vc-pass-canvas">
+            <div class="callout">
+              <div class="callout-head"><span class="badge badge--accent">${state.players}P Win Trigger</span></div>
+              <p><strong>${esc(DATA.stage1_hook.win_trigger_by_players[pStr])}</strong></p>
+              <p style="font-size:var(--fs-sm);color:var(--text-muted);">${esc(DATA.stage1_hook.win_summary)} ${renderCitations(DATA.stage1_hook.citations)}</p>
+            </div>
+
+            <div class="vc-split">
+              <section class="vc-pane">
+                <h2 style="font-family:var(--font-display);font-size:var(--fs-xl);">Your Turn in 3 Steps</h2>
+                ${DATA.stage3_turn.phases.map((ph) => `
+                  <div style="padding-bottom:var(--space-2);border-bottom:1px solid var(--border);">
+                    <strong>${esc(ph.name)}</strong>
+                    <p style="font-size:var(--fs-sm);color:var(--text-muted);">${esc(ph.player_summary)} ${renderCitations(ph.citations)}</p>
+                  </div>
+                `).join('')}
+                ${DATA.stage3_turn.free_action ? `<p style="font-size:var(--fs-sm);"><strong>Free Bonus (1/turn):</strong> ${esc(DATA.stage3_turn.free_action.detail)} ${renderCitations(DATA.stage3_turn.free_action.citations)}</p>` : ''}
+              </section>
+              <div>${renderTurnFlowSVG()}</div>
+            </div>
+
+            <div class="vc-pass-grid">
+              <section class="vc-pane">
+                <h2 style="font-family:var(--font-display);font-size:var(--fs-xl);">Iconography Key</h2>
+                <div class="icon-grid">
+                  ${ref.iconography.map((ic) => `
+                    <div class="icon-row">
+                      <div class="icon-glyph">${renderIconSVG(ic)}</div>
+                      <div><strong>${esc(ic.name)}</strong><div style="font-size:var(--fs-sm);color:var(--text-muted);">${esc(ic.effect)} ${renderCitations(ic.citations)}</div></div>
+                    </div>
+                  `).join('')}
+                </div>
+              </section>
+
+              <section class="vc-pane">
+                <h2 style="font-family:var(--font-display);font-size:var(--fs-xl);">End-Game Scoring</h2>
+                ${ref.scoring.rows.map((r) => `
+                  <div style="display:flex;justify-content:space-between;gap:var(--space-2);border-bottom:1px solid var(--border);padding-bottom:var(--space-1);">
+                    <span><strong>${esc(r.source)}</strong> ${renderCitations(r.citations)}</span>
+                    <span style="font-family:var(--font-mono);color:var(--accent-strong);">${esc(r.points)}</span>
+                  </div>
+                `).join('')}
+                <p style="font-size:var(--fs-sm);color:var(--text-muted);">${esc(ref.scoring.tiebreakers)}</p>
+                ${errataList.length ? `<h3 style="font-size:var(--fs-md);margin-top:var(--space-2);">Important Table Errata</h3>${errataList.map(renderErrataCallout).join('')}` : ''}
+              </section>
+            </div>
+
+            ${renderAttributionBlock()}
+          </main>
+        </div>
+        ${renderDrawer()}
+      `;
+      wireSearchInput();
+    }
+
+    function renderTeacherMode() {
+      const ref = DATA.stage5_reference;
+      const doneCount = state.checked.size;
+      const pStr = String(state.players);
+      const stages = [
+        { num: 1, label: 'Hook & Win' },
+        { num: 2, label: `Setup (${doneCount}/${SETUP_TOTAL})` },
+        { num: 3, label: 'Turn Anatomy' },
+        { num: 4, label: 'First Round' },
+        { num: 5, label: 'Edge Cases & Ref' }
+      ];
+
+      let mainHtml = '';
+      if (state.cStage === 1) {
+        mainHtml = `
+          <div class="vc-split">
+            <section class="vc-pane">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-2);align-items:center;">
+                <h2 style="font-family:var(--font-display);font-size:var(--fs-xl);">Stage 1 · Hook &amp; Win State</h2>
+                <span class="badge badge--accent">${state.players}P Active</span>
+              </div>
+              <div class="callout"><div class="callout-head"><span class="badge badge--accent">HOLD UP</span><span>${esc(DATA.stage1_hook.physical_cue)}</span></div></div>
+              <p style="font-size:var(--fs-lg);">${esc(DATA.stage1_hook.pitch_aloud)} ${renderCitations(DATA.stage1_hook.citations)}</p>
+              <div class="callout">
+                <div class="callout-head"><span>Win Trigger (${state.players} Players)</span></div>
+                <p>${esc(DATA.stage1_hook.win_trigger_by_players[pStr])}</p>
+                <p style="font-size:var(--fs-sm);color:var(--text-muted);">${esc(DATA.stage1_hook.win_summary)}</p>
+              </div>
+              <div style="display:flex;justify-content:flex-end;">
+                <button type="button" class="btn btn--accent" data-action="set-c-stage" data-stage="2">Next: Stage 2 Setup &rarr;</button>
+              </div>
+            </section>
+            <section class="vc-pane">
+              <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);">At-a-Glance Table Summary</h3>
+              <p style="font-size:var(--fs-sm);color:var(--text-muted);">Weight ${esc(DATA.meta.weight)} · ${esc(DATA.meta.min_players)}–${esc(DATA.meta.max_players)} Players · ${esc(DATA.meta.playtime_min)} min · ~${esc(DATA.meta.teach_time_min)} min teach</p>
+              ${renderTurnFlowSVG()}
+            </section>
+          </div>
+        `;
+      } else if (state.cStage === 2) {
+        const allSetupItems = [...DATA.stage2_setup.shared_board, ...DATA.stage2_setup.per_player];
+        const stage2Errata = collectUniqueErrata(allSetupItems);
+        const stage2Verify = collectUniqueVerify(allSetupItems);
+        mainHtml = `
+          <div class="vc-split">
+            <section class="vc-pane">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-2);align-items:center;">
+                <h2 style="font-family:var(--font-display);font-size:var(--fs-xl);">Stage 2 · Component-Guided Setup (${state.players}P)</h2>
+                <button type="button" class="btn btn--ghost" data-action="reset-setup">Reset Setup (${doneCount}/${SETUP_TOTAL})</button>
+              </div>
+              <h3 style="font-size:var(--fs-sm);color:var(--accent-strong);text-transform:uppercase;letter-spacing:0.05em;">Shared Board</h3>
+              ${DATA.stage2_setup.shared_board.map(renderSetupCheckboxItem).join('')}
+              <h3 style="font-size:var(--fs-sm);color:var(--accent-strong);text-transform:uppercase;letter-spacing:0.05em;margin-top:var(--space-2);">Per-Player Kits</h3>
+              ${DATA.stage2_setup.per_player.map(renderSetupCheckboxItem).join('')}
+            </section>
+
+            <aside class="vc-pane">
+              <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);">Companion Flow &amp; ${state.players}P Deltas</h3>
+              ${renderTurnFlowSVG()}
+              ${stage2Errata.map(renderErrataCallout).join('')}
+              ${stage2Verify.map(renderVerifyCallout).join('')}
+              <button type="button" class="btn btn--accent" data-action="set-c-stage" data-stage="3">Next: Turn Anatomy &rarr;</button>
+            </aside>
+          </div>
+        `;
+      } else if (state.cStage === 3) {
+        const refItems = [];
+        DATA.stage3_turn.phases.forEach((ph) => {
+          refItems.push(ph);
+          if (Array.isArray(ph.subactions)) refItems.push(...ph.subactions);
+        });
+        const stage3Errata = collectUniqueErrata(refItems);
+        mainHtml = `
+          <div class="vc-split">
+            <section class="vc-pane">
+              <h2 style="font-family:var(--font-display);font-size:var(--fs-xl);">Stage 3 · Plain-English Turn Anatomy</h2>
+              <p style="color:var(--text-muted);">${esc(DATA.stage3_turn.summary)}</p>
+              ${DATA.stage3_turn.phases.map((ph) => `
+                <div class="callout">
+                  <div class="callout-head">
+                    <span class="badge badge--info">Phase ${esc(ph.step)}</span>
+                    <span>${esc(ph.name)}</span>
+                  </div>
+                  <div style="font-size:var(--fs-sm);color:var(--accent-strong);font-weight:700;">HOLD UP: ${esc(ph.physical_cue)}</div>
+                  <p>${esc(ph.say_aloud)} ${renderCitations(ph.citations)}</p>
+                  ${Array.isArray(ph.subactions) && ph.subactions.length ? `<ul style="display:flex;flex-direction:column;gap:4px;font-size:var(--fs-sm);">${ph.subactions.map((s) => `<li>• <strong>${esc(s.name)}:</strong> ${esc(s.detail)} ${renderCitations(s.citations)}</li>`).join('')}</ul>` : ''}
+                </div>
+              `).join('')}
+              ${DATA.stage3_turn.free_action ? `
+                <div class="callout">
+                  <div class="callout-head"><span class="badge badge--accent">Bonus</span><span>${esc(DATA.stage3_turn.free_action.name)}</span></div>
+                  <p style="font-size:var(--fs-sm);">${esc(DATA.stage3_turn.free_action.detail)} ${renderCitations(DATA.stage3_turn.free_action.citations)}</p>
+                </div>
+              ` : ''}
+            </section>
+
+            <aside class="vc-pane">
+              <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);">Turn Flow${stage3Errata.length ? ' &amp; Errata' : ''}</h3>
+              ${renderTurnFlowSVG()}
+              ${stage3Errata.map(renderErrataCallout).join('')}
+              <button type="button" class="btn btn--accent" data-action="set-c-stage" data-stage="4">Next: Guided First Round &rarr;</button>
+            </aside>
+          </div>
+        `;
+      } else if (state.cStage === 4) {
+        mainHtml = `
+          <div class="vc-split">
+            <section class="vc-pane">
+              <h2 style="font-family:var(--font-display);font-size:var(--fs-xl);">Stage 4 · Guided First Round</h2>
+              ${DATA.stage4_first_round.map((b) => `
+                <div class="callout">
+                  <div class="callout-head">
+                    <span class="badge badge--accent">Beat ${esc(b.beat)}</span>
+                    <span>${esc(b.title)}</span>
+                    <span class="badge badge--muted badge--wrap">${esc(b.physical_cue)}</span>
+                  </div>
+                  <p>${esc(b.say_aloud)} ${renderCitations(b.citations)}</p>
+                </div>
+              `).join('')}
+            </section>
+
+            <aside class="vc-pane">
+              <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);">Iconography Key</h3>
+              <div class="icon-grid">
+                ${ref.iconography.map((ic) => `
+                  <div class="icon-row">
+                    <div class="icon-glyph">${renderIconSVG(ic)}</div>
+                    <div><strong>${esc(ic.name)}</strong><div style="font-size:var(--fs-sm);color:var(--text-muted);">${esc(ic.effect)} ${renderCitations(ic.citations)}</div></div>
+                  </div>
+                `).join('')}
+              </div>
+              <button type="button" class="btn btn--accent" data-action="set-c-stage" data-stage="5">Next: Edge Cases &amp; Scoring &rarr;</button>
+            </aside>
+          </div>
+        `;
+      } else {
+        const gotchas = Array.isArray(ref.top_gotchas) ? ref.top_gotchas : [];
+        const verifyList = Array.isArray(ref.verify_before_table) ? ref.verify_before_table : [];
+        mainHtml = `
+          <div class="vc-split">
+            <section class="vc-pane">
+              <h2 style="font-family:var(--font-display);font-size:var(--fs-xl);">Stage 5 · Edge Cases, Errata &amp; Notes</h2>
+              ${verifyList.map(renderVerifyCallout).join('')}
+              ${ref.errata_list.map(renderErrataCallout).join('')}
+              ${gotchas.length ? `
+                <h3 style="font-size:var(--fs-sm);color:var(--accent-strong);text-transform:uppercase;letter-spacing:0.05em;margin-top:var(--space-2);">Top First-Game Gotchas</h3>
+                ${gotchas.map((g, i) => `
+                  <div class="callout">
+                    <div class="callout-head"><span class="badge badge--accent">Gotcha ${i + 1}</span><span>${esc(g.title)}</span></div>
+                    <p style="font-size:var(--fs-sm);">${esc(g.detail)} ${renderCitations(g.citations)}</p>
+                  </div>
+                `).join('')}
+              ` : ''}
+              ${ref.edge_cases.map((ec) => `
+                <div class="callout">
+                  <div class="callout-head"><span>${esc(ec.title)}</span></div>
+                  <p style="font-size:var(--fs-sm);">${esc(ec.detail)} ${renderCitations(ec.citations)}</p>
+                </div>
+              `).join('')}
+              ${renderOwnerNotesCallout()}
+            </section>
+
+            <aside class="vc-pane">
+              <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);">End-Game Scoring &amp; Links</h3>
+              ${ref.scoring.rows.map((r) => `
+                <div style="display:flex;justify-content:space-between;gap:var(--space-2);border-bottom:1px solid var(--border);padding-bottom:var(--space-1);">
+                  <span><strong>${esc(r.source)}</strong> ${renderCitations(r.citations)}</span>
+                  <span style="font-family:var(--font-mono);color:var(--accent-strong);">${esc(r.points)}</span>
+                </div>
+              `).join('')}
+              <p style="font-size:var(--fs-sm);color:var(--text-muted);">${esc(ref.scoring.tiebreakers)}</p>
+              ${renderLinksBlock()}
+              ${renderAttributionBlock()}
+            </aside>
+          </div>
+        `;
+      }
+
+      rootEl.innerHTML = `
+        <div class="vc-shell">
+          <aside class="vc-rail" aria-label="Teach stages and table controls">
+            <div class="vc-rail-head">
+              <div style="display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap;">
+                <h1 class="vc-title">${esc(DATA.meta.title)}</h1>
+                ${renderStatusBadge()}
+              </div>
+              <div class="vc-rail-actions">
+                <button type="button" class="btn btn--ghost" data-action="toggle-c-drawer" aria-expanded="${state.cDrawerOpen}">Search &amp; Settings</button>
+                <button type="button" class="btn btn--accent" data-action="toggle-c-passaround" aria-pressed="false">Pass-Around</button>
+              </div>
+            </div>
+
+            <nav class="vc-stage-list" aria-label="5-stage funnel timeline">
+              ${stages.map((s) => `
+                <button type="button" class="vc-stage-btn" data-action="set-c-stage" data-stage="${s.num}" aria-current="${state.cStage === s.num ? 'step' : 'false'}">
+                  <span class="vc-stage-num">${s.num}</span>
+                  <span>${esc(s.label)}</span>
+                </button>
+              `).join('')}
+            </nav>
+
+            <div class="vc-rail-links">
+              ${renderLinksBlock()}
+            </div>
+          </aside>
+
+          <main class="vc-canvas">
+            ${mainHtml}
+            ${state.cStage !== 5 ? `<div class="vc-mobile-links">${renderLinksBlock()}</div>` : ''}
+          </main>
+        </div>
+        ${renderDrawer()}
+      `;
+      wireSearchInput();
+    }
+
+    function renderManualFallback(errText) {
+      applyTheme(state.theme);
+      rootEl.innerHTML = `
+        <main class="paste-fallback">
+          <section class="vc-pane">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-2);">
+              <h1 style="font-family:var(--font-display);font-size:var(--fs-2xl);">bg-teach — Manual Guide Loader</h1>
+              ${renderThemePills()}
+            </div>
+            <p style="color:var(--text-muted);font-size:var(--fs-sm);">This template contains no embedded <code>guide.json</code> payload. Paste a valid <code>bg-teach-v1</code> JSON guide below to load the Variant C table guide in this browser tab, or compile a standalone HTML file using <code>scripts/compile.py</code>.</p>
+            <label class="sr-only" for="manual-guide-json">Paste guide.json payload</label>
+            <textarea id="manual-guide-json" class="paste-box" placeholder='{"schema_version":"bg-teach-v1", ...}'></textarea>
+            <div id="manual-json-error" style="font-size:var(--fs-sm);color:var(--bad);">${errText ? esc(errText) : ''}</div>
+            <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;">
+              <button type="button" class="btn btn--accent" data-action="load-manual-json">Load Guide JSON</button>
+            </div>
+          </section>
+        </main>
+      `;
+    }
+
+    function validateManualGuideShape(g) {
+      if (!g || typeof g !== 'object' || Array.isArray(g)) return 'Guide payload must be a JSON object.';
+      if (g.schema_version !== 'bg-teach-v1') return 'schema_version must be "bg-teach-v1".';
+      if (!g.meta || typeof g.meta.title !== 'string' || !g.meta.title.trim()) return 'meta.title is required.';
+      const minP = g.meta.min_players;
+      const maxP = g.meta.max_players;
+      if (!Number.isInteger(minP) || !Number.isInteger(maxP) || minP < 1 || maxP < minP || maxP > 12) {
+        return 'meta.min_players/max_players must satisfy 1 <= min <= max <= 12.';
+      }
+      if (!g.links || typeof g.links.bgg_search_url !== 'string' || typeof g.links.bgg_search_label !== 'string') {
+        return 'links.bgg_search_url and bgg_search_label are required.';
+      }
+      if (!g.stage1_hook || !g.stage1_hook.win_trigger_by_players || typeof g.stage1_hook.win_trigger_by_players !== 'object') {
+        return 'stage1_hook.win_trigger_by_players is required.';
+      }
+      for (let p = minP; p <= maxP; p++) {
+        if (typeof g.stage1_hook.win_trigger_by_players[String(p)] !== 'string') {
+          return `stage1_hook.win_trigger_by_players missing key "${p}".`;
+        }
+      }
+      if (!g.stage2_setup || !Array.isArray(g.stage2_setup.shared_board) || !Array.isArray(g.stage2_setup.per_player)) {
+        return 'stage2_setup.shared_board and per_player arrays are required.';
+      }
+      if (!g.stage3_turn || !Array.isArray(g.stage3_turn.phases) || typeof g.stage3_turn.turn_flow_svg !== 'string') {
+        return 'stage3_turn.phases and turn_flow_svg are required.';
+      }
+      if (!Array.isArray(g.stage4_first_round)) {
+        return 'stage4_first_round array is required.';
+      }
+      if (
+        !g.stage5_reference ||
+        !Array.isArray(g.stage5_reference.errata_list) ||
+        !Array.isArray(g.stage5_reference.iconography) ||
+        !Array.isArray(g.stage5_reference.edge_cases) ||
+        !g.stage5_reference.scoring ||
+        !Array.isArray(g.stage5_reference.scoring.rows)
+      ) {
+        return 'stage5_reference arrays and scoring.rows are required.';
+      }
+      return '';
+    }
+
+    function renderApp() {
+      applyTheme(state.theme);
+      if (!DATA) {
+        renderManualFallback();
+        return;
+      }
+      if (state.cPassAround) renderPassAround();
+      else renderTeacherMode();
+    }
+
+    rootEl.addEventListener('click', (e) => {
+      const el = e.target.closest('[data-action]');
+      if (!el) return;
+      const act = el.dataset.action;
+
+      if (act === 'load-manual-json') {
+        const box = document.getElementById('manual-guide-json');
+        const errBox = document.getElementById('manual-json-error');
+        let parsed;
+        try {
+          parsed = JSON.parse((box && box.value) || '');
+        } catch (err) {
+          if (errBox) errBox.textContent = `Invalid guide JSON: ${err.message}`;
+          return;
+        }
+        const shapeErr = validateManualGuideShape(parsed);
+        if (shapeErr) {
+          if (errBox) errBox.textContent = `Invalid guide JSON: ${shapeErr}`;
+          return;
+        }
+        try {
+          initGuideData(parsed);
+          renderApp();
+        } catch (err) {
+          DATA = null;
+          renderManualFallback(`Invalid guide JSON: ${err.message}`);
+        }
+      } else if (act === 'set-players') {
+        state.players = Number(el.dataset.players);
+        savePersistedState();
+        renderApp();
+      } else if (act === 'set-theme') {
+        applyTheme(el.dataset.themeVal);
+        savePersistedState();
+        renderApp();
+      } else if (act === 'toggle-wake') {
+        toggleWakeLock();
+      } else if (act === 'reset-setup') {
+        state.checked.clear();
+        savePersistedState();
+        renderApp();
+      } else if (act === 'set-c-stage') {
+        state.cStage = Number(el.dataset.stage);
+        renderApp();
+      } else if (act === 'toggle-c-passaround') {
+        state.cPassAround = !state.cPassAround;
+        renderApp();
+      } else if (act === 'toggle-c-drawer') {
+        state.cDrawerOpen = !state.cDrawerOpen;
+        renderApp();
+        if (state.cDrawerOpen) {
+          const inp = document.getElementById('c-search');
+          if (inp) inp.focus();
+        }
+      } else if (act === 'close-c-drawer-backdrop') {
+        if (e.target === el) {
+          state.cDrawerOpen = false;
+          renderApp();
+        }
+      } else if (act === 'clear-c-search') {
+        state.cSearchQuery = '';
+        const inp = document.getElementById('c-search');
+        if (inp) {
+          inp.value = '';
+          inp.focus();
+        }
+        const box = document.getElementById('c-search-results');
+        if (box) box.innerHTML = renderSearchResultsHtml();
+      } else if (act === 'c-jump-stage') {
+        state.cStage = Number(el.dataset.stage);
+        state.cDrawerOpen = false;
+        renderApp();
+      }
+    });
+
+    rootEl.addEventListener('change', (e) => {
+      const cb = e.target.closest('input[data-action="toggle-check"]');
+      if (!cb) return;
+      const id = cb.dataset.checkId;
+      if (cb.checked) state.checked.add(id);
+      else state.checked.delete(id);
+      savePersistedState();
+      renderApp();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && state.cDrawerOpen) {
+        state.cDrawerOpen = false;
+        renderApp();
+      }
+    });
+
+    const dataEl = document.getElementById('guide-data');
+    const rawPayload = dataEl ? dataEl.textContent.trim() : '';
+    if (rawPayload && rawPayload !== PLACEHOLDER) {
+      try {
+        const parsed = JSON.parse(rawPayload);
+        initGuideData(parsed);
+      } catch (_) {
+        DATA = null;
+      }
+    }
+    renderApp();
+  })();
+  </script>
+</body>
+</html>
