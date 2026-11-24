@@ -1,0 +1,364 @@
+{
+  "schema_version": "bg-teach-v1",
+  "status": "draft",
+  "bgg_id": null,
+  "game_uuid": "proto-lantern-harbor-001",
+  "meta": {
+    "title": "Lantern Harbor",
+    "subtitle": "Coastal Charter & Beacon Route-Building",
+    "publisher": "Tideglass Games (Synthetic Prototype Fixture)",
+    "weight": 2.6,
+    "min_players": 2,
+    "max_players": 5,
+    "playtime_min": 60,
+    "teach_time_min": 8
+  },
+  "links": {
+    "official_pdf_url": "https://example.invalid/tideglass/lantern-harbor-rulebook-v1.2.pdf",
+    "official_pdf_label": "Official Publisher PDF (v1.2, synthetic URL)",
+    "pdf_local_path": "./sidecar/Lantern-Harbor-Rulebook-v1.2.pdf",
+    "pdf_local_label": "Local PDF (private sidecar)",
+    "bgg_search_url": "https://boardgamegeek.com/geeksearch.php?action=search&objecttype=boardgame&q=Lantern+Harbor",
+    "bgg_search_label": "Search BGG Rules Forum (Browser Only)"
+  },
+  "stage1_hook": {
+    "title": "Hook & Win State",
+    "physical_cue": "Hold up: 1 Brass Lantern token & 1 Charter Card",
+    "pitch_aloud": "You are rival harbor wardens guiding cargo sloops through shifting coastal fog. Light stone beacons along dangerous channels, haul Spice, Glass, and Timber to the wharves, and fulfill shipping Charters before winter closes the bay.",
+    "win_summary": "The captain with the most Prestige (★) from fulfilled Charters, lit Beacon rings, and leftover Harbor Seals wins.",
+    "win_trigger_by_players": {
+      "2": "Trigger end-game when any captain reaches 6 completed Charters, OR when the Fog Bell Deck runs out (finish equal turns).",
+      "3": "Trigger end-game when any captain reaches 5 completed Charters, OR when the Fog Bell Deck runs out (finish equal turns).",
+      "4": "Trigger end-game when any captain reaches 5 completed Charters, OR when the Fog Bell Deck runs out (finish equal turns).",
+      "5": "Trigger end-game when any captain reaches 4 completed Charters, OR when the Fog Bell Deck runs out (finish equal turns)."
+    },
+    "citations": ["(Rulebook p. 2)", "(Rulebook p. 14)"]
+  },
+  "stage2_setup": {
+    "shared_board": [
+      {
+        "id": "s-board",
+        "name": "Harbor Board & Blocked Piers",
+        "deltas": {
+          "2": "Calm Bay side face up; cover 4 outer reef piers with Fog Caps.",
+          "3": "Calm Bay side face up; cover 2 outer reef piers with Fog Caps.",
+          "4": "Open Bay side face up; leave all outer piers open (0 blocked).",
+          "5": "Open Bay side face up; attach the Auxiliary Pier board edge tile."
+        },
+        "citations": ["(Rulebook p. 4)"],
+        "verify_ref": "v-aux-pier",
+        "verify_players": [5]
+      },
+      {
+        "id": "s-fog-deck",
+        "name": "Fog Bell Deck (Game Timer)",
+        "deltas": {
+          "2": "Deal 14 cards face down; place Winter Gale strictly on the bottom.",
+          "3": "Deal 16 cards face down; place Winter Gale strictly on the bottom.",
+          "4": "Deal 18 cards face down; place Winter Gale strictly on the bottom.",
+          "5": "Deal 20 cards face down; place Winter Gale strictly on the bottom."
+        },
+        "citations": ["(Rulebook p. 4)", "(Publisher Errata v1.2)"],
+        "errata_ref": "err-winter-gale"
+      },
+      {
+        "id": "s-market",
+        "name": "Wharf Market Charters",
+        "deltas": {
+          "2": "Reveal 4 Charter Cards face up along the Wharf strip.",
+          "3": "Reveal 5 Charter Cards face up along the Wharf strip.",
+          "4": "Reveal 5 Charter Cards face up along the Wharf strip.",
+          "5": "Reveal 6 Charter Cards face up along the Wharf strip."
+        },
+        "citations": ["(Rulebook p. 5)"]
+      },
+      {
+        "id": "s-crates",
+        "name": "Cargo Warehouse Supply",
+        "deltas": {
+          "2": "Stock 6 crates each of Spice, Glass, and Timber in the Warehouse.",
+          "3": "Stock 8 crates each of Spice, Glass, and Timber in the Warehouse.",
+          "4": "Stock 10 crates each of Spice, Glass, and Timber in the Warehouse.",
+          "5": "Stock 12 crates each of Spice, Glass, and Timber in the Warehouse."
+        },
+        "citations": ["(Rulebook p. 5)"]
+      },
+      {
+        "id": "s-buoys",
+        "name": "Lighthouse Track & Central Buoy",
+        "deltas": null,
+        "static_text": "All player counts: Place the Lighthouse Track marker on 1 and set the wooden Fog Bank Buoy on Central Channel.",
+        "citations": ["(Rulebook p. 5)"]
+      }
+    ],
+    "per_player": [
+      {
+        "id": "p-lanterns",
+        "name": "Warden Mat, Sloop & Brass Lanterns",
+        "deltas": {
+          "2": "Each player takes 1 Warden Mat, 1 Sloop, and 10 Lanterns.",
+          "3": "Each player takes 1 Warden Mat, 1 Sloop, and 9 Lanterns.",
+          "4": "Each player takes 1 Warden Mat, 1 Sloop, and 8 Lanterns.",
+          "5": "Each player takes 1 Warden Mat, 1 Sloop, and 7 Lanterns."
+        },
+        "citations": ["(Rulebook p. 6)"]
+      },
+      {
+        "id": "p-silver",
+        "name": "Starting Silver by Turn Order",
+        "deltas": {
+          "2": "Give seat 1–2: 4 / 5 Silver.",
+          "3": "Give seats 1–3: 4 / 5 / 5 Silver.",
+          "4": "Give seats 1–4: 4 / 5 / 5 / 6 Silver.",
+          "5": "Give seats 1–5: 4 / 5 / 5 / 6 / 6 Silver."
+        },
+        "citations": ["(Rulebook p. 6)", "(Publisher FAQ v1.2)"]
+      },
+      {
+        "id": "p-charters",
+        "name": "Private Starting Charters",
+        "deltas": {
+          "2": "Deal 4 Charter Cards to each player; keep 2 and discard 2.",
+          "3": "Deal 3 Charter Cards to each player; keep 2 and discard 1.",
+          "4": "Deal 3 Charter Cards to each player; keep 2 and discard 1.",
+          "5": "Deal 3 Charter Cards to each player; keep 2 and discard 1."
+        },
+        "citations": ["(Rulebook p. 6)"]
+      },
+      {
+        "id": "p-sloop",
+        "name": "Starting Quay & Prestige Zero",
+        "deltas": null,
+        "static_text": "All player counts: Place every Sloop on Central Quay and every Prestige disc on space 0.",
+        "citations": ["(Rulebook p. 6)"]
+      }
+    ]
+  },
+  "stage3_turn": {
+    "summary": "Every turn follows the exact same three-beat rhythm: Sail, take one Harbor Action, then ring the Fog Bell. You may also spend one Harbor Seal once per turn as a free bonus.",
+    "turn_flow_svg": "<svg viewBox=\"0 0 680 210\" width=\"680\" height=\"210\" role=\"img\" aria-labelledby=\"svg-flow-title svg-flow-desc\"><title id=\"svg-flow-title\">Lantern Harbor Turn-Flow Diagram</title><desc id=\"svg-flow-desc\">Three-step turn sequence: Phase 1 Sail 1 to 2 channels, Phase 2 Choose one Harbor Action (Light Lantern, Load Cargo, or Fulfill Charter), Phase 3 Ring Fog Bell and refill market, plus Free Seal Bonus Action.</desc><defs><marker id=\"lh-arrow\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M 1 1 L 9 5 L 1 9 z\" fill=\"var(--accent-strong)\" /></marker></defs><rect x=\"14\" y=\"24\" width=\"184\" height=\"96\" rx=\"10\" fill=\"var(--surface-2)\" stroke=\"var(--info)\" stroke-width=\"2.2\" /><text x=\"30\" y=\"50\" fill=\"var(--info)\" font-family=\"var(--font-mono)\" font-size=\"12\" font-weight=\"700\">PHASE 1</text><text x=\"30\" y=\"74\" fill=\"var(--text)\" font-family=\"var(--font-display)\" font-size=\"16\" font-weight=\"700\">Sail Sloop (1–2)</text><text x=\"30\" y=\"98\" fill=\"var(--text-muted)\" font-family=\"var(--font-body)\" font-size=\"12.5\">1 Silver per unlit channel</text><line x1=\"198\" y1=\"72\" x2=\"226\" y2=\"72\" stroke=\"var(--accent-strong)\" stroke-width=\"2.4\" marker-end=\"url(#lh-arrow)\" /><rect x=\"232\" y=\"14\" width=\"222\" height=\"116\" rx=\"10\" fill=\"var(--surface-2)\" stroke=\"var(--accent)\" stroke-width=\"2.5\" /><text x=\"248\" y=\"40\" fill=\"var(--accent-strong)\" font-family=\"var(--font-mono)\" font-size=\"12\" font-weight=\"700\">PHASE 2 · PICK ONE</text><text x=\"248\" y=\"64\" fill=\"var(--text)\" font-family=\"var(--font-display)\" font-size=\"16\" font-weight=\"700\">Harbor Action</text><text x=\"248\" y=\"86\" fill=\"var(--text-muted)\" font-family=\"var(--font-body)\" font-size=\"12.5\">• Light Lantern (1 Timber + 1 Ag)</text><text x=\"248\" y=\"104\" fill=\"var(--text-muted)\" font-family=\"var(--font-body)\" font-size=\"12.5\">• Load Cargo (up to 2; cap 4)</text><text x=\"248\" y=\"122\" fill=\"var(--text-muted)\" font-family=\"var(--font-body)\" font-size=\"12.5\">• Fulfill Charter (score ★ + Seal)</text><line x1=\"454\" y1=\"72\" x2=\"482\" y2=\"72\" stroke=\"var(--accent-strong)\" stroke-width=\"2.4\" marker-end=\"url(#lh-arrow)\" /><rect x=\"488\" y=\"24\" width=\"178\" height=\"96\" rx=\"10\" fill=\"var(--surface-2)\" stroke=\"var(--ok)\" stroke-width=\"2.2\" /><text x=\"504\" y=\"50\" fill=\"var(--ok)\" font-family=\"var(--font-mono)\" font-size=\"12\" font-weight=\"700\">PHASE 3</text><text x=\"504\" y=\"74\" fill=\"var(--text)\" font-family=\"var(--font-display)\" font-size=\"16\" font-weight=\"700\">Ring Fog Bell</text><text x=\"504\" y=\"98\" fill=\"var(--text-muted)\" font-family=\"var(--font-body)\" font-size=\"12.5\">Drift Buoy, refill, pass turn</text><path d=\"M 577 120 L 577 148 L 106 148 L 106 124\" fill=\"none\" stroke=\"var(--border-strong)\" stroke-width=\"2\" stroke-dasharray=\"5 4\" marker-end=\"url(#lh-arrow)\" /><rect x=\"275\" y=\"137\" width=\"136\" height=\"22\" rx=\"11\" fill=\"var(--bg)\" stroke=\"var(--border)\" stroke-width=\"1\" /><text x=\"343\" y=\"152\" text-anchor=\"middle\" fill=\"var(--text-muted)\" font-family=\"var(--font-mono)\" font-size=\"11\">NEXT CAPTAIN</text><rect x=\"130\" y=\"168\" width=\"420\" height=\"32\" rx=\"16\" fill=\"var(--accent-soft)\" stroke=\"var(--accent)\" stroke-width=\"1.5\" /><text x=\"340\" y=\"188\" text-anchor=\"middle\" fill=\"var(--text)\" font-family=\"var(--font-body)\" font-size=\"12.5\" font-weight=\"700\">Free Bonus (1/turn, before/after Phase 2): Spend 1 Seal → +1 Sail or Swap 1 Crate</text></svg>",
+    "phases": [
+      {
+        "id": "ph-sail",
+        "step": 1,
+        "name": "Phase 1 — Sail Your Sloop (1–2 Channels)",
+        "physical_cue": "Hold up: Wooden Sloop + 1 Silver coin",
+        "say_aloud": "Move your Sloop 1 or 2 connected water channels. If you enter an unlit channel with no adjacent Brass Lantern, pay 1 Silver toll into the bank. Lit channels are always free to sail through.",
+        "player_summary": "Move 1–2 channels. Pay 1 Silver per unlit channel entered (lit channels are free).",
+        "citations": ["(Rulebook p. 8)"]
+      },
+      {
+        "id": "ph-action",
+        "step": 2,
+        "name": "Phase 2 — Take ONE Harbor Action",
+        "physical_cue": "Hold up: Brass Lantern, 2 Cargo Crates, then 1 Charter Card",
+        "say_aloud": "Once docked, pick exactly one of three harbor actions: Light a Lantern, Load Cargo, or Fulfill a Charter.",
+        "player_summary": "Choose 1 of: Light a Lantern, Load Cargo (max 4 in hold), or Fulfill a Charter.",
+        "subactions": [
+          {
+            "name": "Light a Lantern",
+            "detail": "Pay 1 Timber + 1 Silver to place 1 Brass Lantern on an empty Beacon touching your pier, then claim that Beacon's printed instant bonus.",
+            "citations": ["(Rulebook p. 9)"]
+          },
+          {
+            "name": "Load Cargo",
+            "detail": "Take up to 2 Crates matching your docked pier icon. Your Sloop hold caps strictly at 4 Crates — swap immediately with the Warehouse if full.",
+            "citations": ["(Rulebook p. 9)", "(Publisher Errata v1.2)", "(Publisher FAQ v1.2)"],
+            "errata_ref": "err-cargo-hold"
+          },
+          {
+            "name": "Fulfill a Charter",
+            "detail": "Return the required Cargo Crates shown on a private Charter or face-up Wharf Market Charter. Gain its Prestige (★) and 1 Harbor Seal.",
+            "citations": ["(Rulebook p. 10)"]
+          }
+        ],
+        "citations": ["(Rulebook p. 9)", "(Rulebook p. 10)"]
+      },
+      {
+        "id": "ph-bell",
+        "step": 3,
+        "name": "Phase 3 — Ring the Fog Bell",
+        "physical_cue": "Hold up: Top Fog Bell card + Fog Bank Buoy",
+        "say_aloud": "Flip the top Fog Bell card, move the Fog Bank Buoy 1 channel clockwise if shown, refill any empty Wharf Market slots, and pass the turn.",
+        "player_summary": "Flip top Fog Bell card, drift Fog Bank Buoy if prompted, refill Wharf Market, pass turn.",
+        "citations": ["(Rulebook p. 11)"]
+      }
+    ],
+    "free_action": {
+      "name": "Free Bonus Action (Once Per Turn)",
+      "detail": "Discard 1 Harbor Seal before or after your Phase 2 action to sail +1 extra channel OR swap 1 Cargo Crate in your hold at Central Quay.",
+      "citations": ["(Rulebook p. 10)", "(BG.SE #41082)"]
+    }
+  },
+  "stage4_first_round": [
+    {
+      "beat": 1,
+      "title": "Open-Handed Demo Turn (Seat 1)",
+      "physical_cue": "Move Seat 1 Sloop to Timber Pier",
+      "say_aloud": "Watch me take Turn 1 out loud: I pay 1 Silver to sail into this unlit Timber Pier, then take Load Cargo to put 2 Timber into my Sloop hold.",
+      "citations": ["(Rulebook p. 8)", "(Rulebook p. 9)"]
+    },
+    {
+      "beat": 2,
+      "title": "Show How Lighting Pays Back",
+      "physical_cue": "Point to Seat 2 Silver + Beacon socket",
+      "say_aloud": "Next turn, anyone sailing near a Timber Beacon can spend 1 Timber + 1 Silver to light a Lantern — making that lane toll-free for everyone and scoring ring bonuses.",
+      "citations": ["(Rulebook p. 9)"]
+    },
+    {
+      "beat": 3,
+      "title": "Check Hold Limits Early",
+      "physical_cue": "Tap the 4 cargo slots on a Warden Mat",
+      "say_aloud": "Notice your Sloop only has four crate slots. Under the living errata, you can never stack a fifth crate temporarily — swap straight back to the Warehouse if full.",
+      "citations": ["(Publisher Errata v1.2)"]
+    },
+    {
+      "beat": 4,
+      "title": "Narrate Round 1 Fog Bell Together",
+      "physical_cue": "Flip the first Fog Bell card face up",
+      "say_aloud": "At the end of Seat 1's turn we flip one Fog Bell card. Once everyone finishes Round 1 open-handed, play continues normally at table pace.",
+      "citations": ["(Rulebook p. 7)", "(Rulebook p. 11)"]
+    }
+  ],
+  "stage5_reference": {
+    "top_gotchas": [
+      {
+        "title": "4-Crate Hold Cap Is Immediate (Errata)",
+        "detail": "Never exceed 4 Cargo Crates even mid-action; swap directly with the Warehouse when loading a full Sloop.",
+        "citations": ["(Publisher Errata v1.2)", "(Publisher FAQ v1.2)"]
+      },
+      {
+        "title": "Fog Toll Applies When Sharing a Pier",
+        "detail": "Another captain's Sloop does not light a channel — only a Brass Lantern on an adjacent Beacon waives the 1 Silver fog toll.",
+        "citations": ["(Rulebook p. 8)"]
+      },
+      {
+        "title": "Winter Gale Guarantees Equal Turns",
+        "detail": "When Winter Gale is revealed (or the final Charter count is met), finish the active round so every seat takes the same number of turns.",
+        "citations": ["(Rulebook p. 11)", "(Rulebook p. 14)"]
+      }
+    ],
+    "edge_cases": [
+      {
+        "id": "ec-warehouse",
+        "title": "Warehouse Crate Shortage",
+        "detail": "Cargo Crates are strictly component-limited. If a pier's color runs empty in the Warehouse, you load only what remains.",
+        "citations": ["(Publisher FAQ v1.2)"]
+      },
+      {
+        "id": "ec-seal-timing",
+        "title": "Harbor Seal Timing Window",
+        "detail": "You may spend your 1/turn Harbor Seal either before Phase 2 or immediately after Phase 2, never while mid-movement inside Phase 1.",
+        "citations": ["(Rulebook p. 10)", "(BG.SE #41082)"]
+      },
+      {
+        "id": "ec-passing",
+        "title": "Passing Through Occupied Sloops",
+        "detail": "Sloops never block movement or docking; multiple Sloops may share the same Quay or Pier without penalty.",
+        "citations": ["(Rulebook p. 8)"]
+      },
+      {
+        "id": "ec-reef",
+        "title": "Stranded at an Unlit Reef on Final Turn",
+        "detail": "If your Sloop ends the game docked at an unlit pier touched by the Fog Bank Buoy, subtract 2 ★ during End-Game Scoring.",
+        "citations": ["(Rulebook p. 12)"]
+      }
+    ],
+    "errata_list": [
+      {
+        "id": "err-winter-gale",
+        "title": "Winter Gale Placement in Fog Bell Deck",
+        "location": "Setup · Fog Bell Deck",
+        "printed": "Printed (p. 4): \"Shuffle Winter Gale randomly into the bottom 3 cards of the Fog Bell Deck.\"",
+        "corrected": "Corrected (Errata v1.2): \"Place Winter Gale strictly as the very bottom card of the Fog Bell Deck, unshuffled.\"",
+        "citations": ["(Rulebook p. 4)", "(Publisher Errata v1.2)"]
+      },
+      {
+        "id": "err-cargo-hold",
+        "title": "Cargo Hold Overflow Timing",
+        "location": "Phase 2 · Load Cargo",
+        "printed": "Printed (p. 9): \"If you hold more than 4 Crates, discard excess crates down to 4 at the end of your turn.\"",
+        "corrected": "Corrected (Errata v1.2 / FAQ): \"Your Sloop hold can never exceed 4 Crates even mid-action; swap immediately with the Warehouse if full.\"",
+        "citations": ["(Rulebook p. 9)", "(Publisher Errata v1.2)", "(Publisher FAQ v1.2)"]
+      }
+    ],
+    "verify_before_table": [
+      {
+        "id": "v-aux-pier",
+        "title": "5P Auxiliary Pier Channel Line Discrepancy",
+        "detail": "The Setup diagram on p. 4 draws one dashed channel linking the 5P Auxiliary Pier only to East Quay, whereas p. 8 movement rules refer to \"both outer channels\" of the Auxiliary Pier. Inspect the physical cardboard tile overlay in the box before teaching a 5-player game.",
+        "citations": ["(Rulebook p. 4)", "(Rulebook p. 8)"]
+      }
+    ],
+    "owner_notes": {
+      "file": "notes.md",
+      "entries": [
+        "Teaching note (2026-11-18): Mention the 1 Silver fog toll and the 4-crate swap errata while handing out Sloops so nobody hits a surprise on Turn 2.",
+        "Table house ruling until Tideglass clarifies 5P: treat only the single printed dashed channel to East Quay as legal."
+      ]
+    },
+    "iconography": [
+      {
+        "id": "ico-lantern",
+        "name": "Brass Lantern",
+        "effect": "Marks a lit Beacon; adjacent channels cost 0 Silver to sail.",
+        "svg": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"var(--accent-strong)\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 4h6M8 7h8l-1 10H9L8 7z\"/><path d=\"M12 10v4\"/><circle cx=\"12\" cy=\"12\" r=\"1.5\" fill=\"var(--accent-strong)\"/><path d=\"M7 20h10\"/></svg>",
+        "citations": ["(Rulebook p. 9)"]
+      },
+      {
+        "id": "ico-crate",
+        "name": "Cargo Crate",
+        "effect": "Spice, Glass, or Timber resource stored in your 4-slot Sloop hold.",
+        "svg": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"var(--accent-strong)\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"2\"/><path d=\"M4 9h16M9 5l6 14M15 5l-6 14\"/></svg>",
+        "citations": ["(Rulebook p. 9)"]
+      },
+      {
+        "id": "ico-silver",
+        "name": "Silver Coin",
+        "effect": "Paid for unlit Fog channel tolls (1) and Beacon lighting (1).",
+        "svg": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"var(--accent-strong)\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"8\"/><path d=\"M12 8v8M9.5 10.5C9.5 9.4 10.6 8.8 12 8.8s2.5.6 2.5 1.7c0 2-5 1.5-5 3.5 0 1.1 1.1 1.7 2.5 1.7s2.5-.6 2.5-1.7\"/></svg>",
+        "citations": ["(Rulebook p. 8)"]
+      },
+      {
+        "id": "ico-seal",
+        "name": "Harbor Seal",
+        "effect": "Spend 1/turn for +1 Sail or Swap 1 Crate; worth 2 ★ at game end.",
+        "svg": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"var(--accent-strong)\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"10\" r=\"5.5\"/><path d=\"M9.5 14.5L8 21l4-2 4 2-1.5-6.5\"/><circle cx=\"12\" cy=\"10\" r=\"2\" fill=\"var(--accent-strong)\"/></svg>",
+        "citations": ["(Rulebook p. 10)", "(BG.SE #41082)"]
+      },
+      {
+        "id": "ico-fog",
+        "name": "Fog Drift",
+        "effect": "Advance the Fog Bank Buoy 1 channel clockwise around the harbor.",
+        "svg": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"var(--accent-strong)\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9h14a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 0-2.4 1.8\"/><path d=\"M3 14h16a2 2 0 0 1 0 4h-2\"/><path d=\"M5 19h9\"/></svg>",
+        "citations": ["(Rulebook p. 11)"]
+      },
+      {
+        "id": "ico-star",
+        "name": "Prestige (★)",
+        "effect": "Victory points tracked around the harbor rim; highest total wins.",
+        "svg": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"var(--accent-strong)\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><polygon points=\"12 3 14.9 8.8 21.3 9.7 16.6 14.2 17.8 20.6 12 17.5 6.2 20.6 7.4 14.2 2.7 9.7 9.1 8.8 12 3\" fill=\"var(--accent-soft)\"/></svg>",
+        "citations": ["(Rulebook p. 12)"]
+      }
+    ],
+    "scoring": {
+      "rows": [
+        { "source": "Fulfilled Charter Cards", "points": "Printed ★ value (3–9 ★ each)", "citations": ["(Rulebook p. 12)"] },
+        { "source": "Lit Beacon Ring Sets", "points": "2 ★ / 4 ★ / 7 ★ for 1 / 2 / 3 harbor rings lit", "citations": ["(Rulebook p. 12)"] },
+        { "source": "Unspent Harbor Seals", "points": "2 ★ per Harbor Seal token", "citations": ["(Rulebook p. 12)"] },
+        { "source": "Remaining Silver", "points": "1 ★ per full 3 Silver", "citations": ["(Rulebook p. 12)"] },
+        { "source": "Unlit Fog Reef Hazard", "points": "−2 ★ if ending in an unlit Fog Buoy pier", "citations": ["(Rulebook p. 12)"] }
+      ],
+      "tiebreakers": "Tiebreakers: (1) Most Brass Lanterns lit on the board, (2) Most Cargo Crates in Sloop hold, (3) Shared victory. (Rulebook p. 14)"
+    },
+    "precedence": "Publisher Errata / Living Rulebook > Printed Rulebook > Publisher FAQ > Owner notes.md > BG.SE",
+    "cc_by_sa": [
+      {
+        "citation": "(BG.SE #41082)",
+        "author": "HarborWarden (Board & Card Games Stack Exchange)",
+        "license": "CC BY-SA 4.0",
+        "note": "Harbor Seal free-action timing clarification adapted from Board & Card Games Stack Exchange question #41082 by HarborWarden, licensed under CC BY-SA 4.0."
+      }
+    ]
+  }
+}
